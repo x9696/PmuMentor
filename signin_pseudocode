@@ -1,0 +1,33 @@
+START
+
+DISPLAY "Enter your email:"
+email = GET USER INPUT
+
+IF email is EMPTY OR INVALID
+    DISPLAY "Invalid email. Try again."
+    STOP
+ENDIF
+
+DISPLAY "Choose authentication method: Email, Google, Apple"
+method = GET USER INPUT
+
+IF method = "Email"
+    SEND verification email to email
+    PROMPT "Enter verification code:"
+    code = GET USER INPUT
+    IF code is VALID
+        DISPLAY "Sign In Successful!"
+    ELSE
+        DISPLAY "Verification Failed."
+    ENDIF
+ELSE IF method = "Google"
+    AUTHENTICATE with Google
+    DISPLAY "Sign In Successful with Google!" IF SUCCESS ELSE "Sign In Failed."
+ELSE IF method = "Apple"
+    AUTHENTICATE with Apple
+    DISPLAY "Sign In Successful with Apple!" IF SUCCESS ELSE "Sign In Failed."
+ELSE
+    DISPLAY "Invalid method."
+ENDIF
+
+END
